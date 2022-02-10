@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return const MaterialApp(
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
@@ -29,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
-    //Timer(Duration(seconds: 5), () => {__goToDashboard(context)});
+    Timer(Duration(seconds: 5), () => {__goToDashboard(context)});
   }
 
   void __goToDashboard(BuildContext context) {
@@ -64,12 +63,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     Padding(
                       padding: EdgeInsets.only(top: 10.0),
                     ),
-                    Text("ODA cagnotte",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Poppins'))
+                    Text(
+                      "ODA cagnotte",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
+                    ),
+                    SizedBox(height: 26),
+                    Image(
+                      image: AssetImage('assets/images/orangemoney.gif'),
+                      height: 160,
+                    ),
                   ],
                 ))),
             Expanded(
@@ -88,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.orange,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Poppins'),
-                  )
+                  ),
                 ],
               ),
             )
