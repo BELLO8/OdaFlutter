@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oda_cagnotte/components/CustomDialog.dart';
+import 'package:oda_cagnotte/components/bannerCard.dart';
 import 'package:oda_cagnotte/components/card.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -74,7 +75,7 @@ class _DashboardHomeState extends State<DashboardHome> {
                   ],
                 ),
               ),
-              Banner(),
+              BannerCard(),
               SizedBox(height: 3),
               Center(
                 child: Column(
@@ -129,118 +130,6 @@ class _DashboardHomeState extends State<DashboardHome> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class Banner extends StatelessWidget {
-  const Banner({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width * 10,
-      height: size.height * 0.3,
-      margin: EdgeInsets.symmetric(vertical: 22),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18), color: Color(0xFFFF9C40)),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Solde total de la cagnote",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "3.000 FrCfa",
-                    style: TextStyle(
-                      fontSize: 35,
-                      color: Colors.white,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Spacer(),
-                Image.asset("assets/images/dash.png", height: 75),
-              ],
-            ),
-            SizedBox(height: 8),
-            Row(
-              children: [
-                MiniCard(nbre: '10', text: 'Academiciens'),
-                MiniCard(nbre: '12', text: 'Motifs'),
-                MiniCard(nbre: '8', text: 'Paiements'),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MiniCard extends StatelessWidget {
-  final String nbre;
-  final String text;
-  const MiniCard({
-    Key? key,
-    required this.nbre,
-    required this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      height: 63,
-      width: size.width * 0.26,
-      margin: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 10.0,
-            offset: const Offset(0.0, 10.0),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(13),
-        color: Color.fromARGB(255, 255, 255, 255),
-      ),
-      child: Column(
-        children: [
-          SizedBox(height: 4),
-          Text(
-            nbre,
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                fontFamily: 'Poppins'),
-          ),
-          Text(
-            text,
-            style: TextStyle(
-                color: Colors.black, fontSize: 11, fontFamily: 'Poppins'),
-          ),
-        ],
       ),
     );
   }
