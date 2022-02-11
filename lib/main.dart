@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 5), () => {__goToDashboard(context)});
+    Timer(Duration(seconds: 3), () => {__goToDashboard(context)});
   }
 
   void __goToDashboard(BuildContext context) {
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 40),
                   Padding(padding: EdgeInsets.only(top: 20.0)),
                   Text(
-                    "Chargement de vos données ... ",
+                    "Chargement des données ... ",
                     style: TextStyle(
                         color: Colors.orange,
                         fontWeight: FontWeight.bold,
