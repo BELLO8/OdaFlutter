@@ -63,3 +63,20 @@ Future<Cagnotte> AddCagnotte(
     throw new Exception('Erreur de chargement des données');
   }
 }
+
+Future<List<Academicien>> allAcademicien() async {
+  List<Academicien> _list = [];
+  final http.Response response = await http.get(
+    Uri.parse('https://popular-bat-6.loca.lt/api/AllAcademicien/'),
+    headers: <String, String>{
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    Iterable data = jsonDecode(response.body);
+    _list = data.map((e) => Academicien.fromJson(e)).toList();
+    return _list;
+  } else {
+    throw new Exception('Erreur de chargement des données');
+  }
+}

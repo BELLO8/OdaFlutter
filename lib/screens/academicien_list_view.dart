@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oda_cagnotte/components/academicien_list_item.dart';
 import 'package:oda_cagnotte/components/custom_app_bar.dart';
+import 'package:oda_cagnotte/services/api.dart';
 
 class AcademicienListView extends StatefulWidget {
   const AcademicienListView({Key? key}) : super(key: key);
@@ -23,7 +24,17 @@ class _AcademicienListViewState extends State<AcademicienListView> {
           title: "Academicien",
           isBackButtonExist: true,
         ),
-        body: SafeArea(child: AcademicienListItem(id)),
+        backgroundColor: Color(0xffF4F7FC),
+        body: SafeArea(
+            child: FutureBuilder(
+                future: allAcademicien(),
+                builder: (context, snapShot) {
+                  if (snapShot.hasData) {
+                    return AcademicienListItem(snapShot.data);
+                  } else {
+                    return Text("pas de données");
+                  }
+                })),
         floatingActionButtonLocation: FloatingActionButtonLocation
             .centerDocked, //specify the location of the FAB
 
