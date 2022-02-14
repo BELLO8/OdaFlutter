@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:oda_cagnotte/models/academiciens.dart';
-import 'package:oda_cagnotte/models/cagnotte.dart';
+import 'package:oda_cagnotte/models/paiement.dart';
 
 const String _baseUrl = "https://bitter-wolverine-5.loca.lt/academicien/";
+
 
 Future<Academicien> getAcademicien() async {
   final response = await http.get(Uri.parse(_baseUrl));
@@ -32,7 +34,9 @@ Future<Academicien> AddAcademicien(
     }),
   );
   if (response.statusCode == 200) {
-    print("${response.body.toString()}");
+    Map<String, dynamic> data = jsonDecode(response.body);
+
+    if (data['status'] == 'true') {}
     return Academicien.fromJson(jsonDecode(response.body));
   } else {
     throw new Exception('Erreur de chargement des données');
