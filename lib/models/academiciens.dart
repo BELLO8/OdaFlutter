@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:oda_cagnotte/helpers/app_constant.dart';
+
 class Academicien {
   final String matricule;
   final String nom;
@@ -15,7 +17,7 @@ class Academicien {
   factory Academicien.fromJson(Map<String, dynamic> json) {
     return Academicien(
       matricule: json['matricule'],
-      photo: json["photo"],
+      photo: AppConstants.URL_BASE + json['photo'],
       nom: json['nom'],
       prenoms: json['prenoms'],
     );

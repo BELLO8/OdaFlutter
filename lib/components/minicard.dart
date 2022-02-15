@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class MiniCard extends StatelessWidget {
-  final String nbre;
+  final Widget child;
   final String text;
   const MiniCard({
     Key? key,
-    required this.nbre,
+    required this.child,
     required this.text,
   }) : super(key: key);
 
@@ -13,7 +13,7 @@ class MiniCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: 63,
+      height: size.height * 0.1,
       width: size.width * 0.26,
       margin: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
       decoration: BoxDecoration(
@@ -30,14 +30,7 @@ class MiniCard extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 4),
-          Text(
-            nbre,
-            style: TextStyle(
-                color: Color(0xFFBE6F14),
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                fontFamily: 'Poppins'),
-          ),
+          child,
           Text(
             text,
             style: TextStyle(

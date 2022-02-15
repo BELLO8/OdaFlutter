@@ -1,10 +1,23 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/src/response.dart';
+import 'package:http/http.dart' as http;
 import 'package:oda_cagnotte/components/minicard.dart';
+import 'package:oda_cagnotte/models/academiciens.dart';
+
+import '../services/api.dart';
 
 class BannerCard extends StatelessWidget {
-  const BannerCard({
+  BannerCard({
     Key? key,
   }) : super(key: key);
+
+  final Future<String> counter = countAcademicien();
+  final Future<String> count_motif = countMotif();
+  final Future<String> count_pay = countPay();
+  final Future<String> solde = getSolde();
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +48,24 @@ class BannerCard extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text(
-                    "3.000 FrCfa",
-                    style: TextStyle(
-                      fontSize: 35,
-                      color: Colors.white,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: FutureBuilder<String>(
+                      future: solde,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            '${snapshot.data} FrCfa',
+                            style: TextStyle(
+                              fontSize: 35,
+                              color: Colors.white,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        } else {
+                          return Text("0");
+                        }
+                      }),
                 ),
                 Spacer(),
                 Image.asset("assets/images/dash.png", height: 75),
@@ -52,14 +74,69 @@ class BannerCard extends StatelessWidget {
             SizedBox(height: 8),
             Row(
               children: [
-                MiniCard(nbre: '10', text: 'Academiciens'),
-                MiniCard(nbre: '12', text: 'Motifs'),
-                MiniCard(nbre: '8', text: 'Paiements'),
+                MiniCard(
+                  text: 'Academiciens',
+                  child: FutureBuilder<String>(
+                      future: counter,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
+                        if (snapshot.hasData) {
+                          return customText(text: '${snapshot.data}');
+                        } else {
+                          return Text("0");
+                        }
+                      }),
+                ),
+                MiniCard(
+                  text: 'Motifs',
+                  child: FutureBuilder<String>(
+                      future: count_motif,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
+                        if (snapshot.hasData) {
+                          return customText(text: '${snapshot.data}');
+                        } else {
+                          return Text("0");
+                        }
+                      }),
+                ),
+                MiniCard(
+                  text: 'Paiements',
+                  child: FutureBuilder<String>(
+                      future: count_pay,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
+                        if (snapshot.hasData) {
+                          return customText(text: '${snapshot.data}');
+                        } else {
+                          return Text("0");
+                        }
+                      }),
+                ),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class customText extends StatelessWidget {
+  const customText({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+          color: Color(0xFFBE6F14),
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          fontFamily: 'Poppins'),
     );
   }
 }

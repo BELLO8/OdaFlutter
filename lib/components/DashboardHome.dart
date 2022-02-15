@@ -1,7 +1,11 @@
+import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:oda_cagnotte/components/CustomDialog.dart';
 import 'package:oda_cagnotte/components/bannerCard.dart';
 import 'package:oda_cagnotte/components/card.dart';
+import 'package:oda_cagnotte/components/motifscreen.dart';
+import 'package:oda_cagnotte/screens/academicien_list_view.dart';
+import 'package:oda_cagnotte/screens/motif.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class DashboardHome extends StatefulWidget {
@@ -82,14 +86,41 @@ class _DashboardHomeState extends State<DashboardHome> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        showDialog(
+                        showAdaptiveActionSheet(
                           context: context,
-                          builder: (BuildContext context) => CustomDialog(
-                            title: "",
-                            description: "",
-                            buttonText: "Okay",
-                          ),
+                          androidBorderRadius: 30,
+                          actions: <BottomSheetAction>[
+                            BottomSheetAction(
+                                title: const Text('Liste des Academiciens',
+                                    style: TextStyle(
+                                        fontSize: 13, fontFamily: 'Poppins')),
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          AcademicienListView()));
+                                }),
+                            BottomSheetAction(
+                                title: const Text('Créer un Academiciens',
+                                    style: TextStyle(
+                                        fontSize: 13, fontFamily: 'Poppins')),
+                                onPressed: () {}),
+                          ],
+                          cancelAction: CancelAction(
+                              title: const Text('retour',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontFamily:
+                                          'Poppins'))), // onPressed parameter is optional by default will dismiss the ActionSheet
                         );
+
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) => CustomDialog(
+                        //     title: "",
+                        //     description: "",
+                        //     buttonText: "Okay",
+                        //   ),
+                        // );
                       },
                       child: CardMenu(
                           image: 'assets/images/college.png',
@@ -97,13 +128,30 @@ class _DashboardHomeState extends State<DashboardHome> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        showDialog(
+                        showAdaptiveActionSheet(
                           context: context,
-                          builder: (BuildContext context) => CustomDialog(
-                            title: "",
-                            description: "",
-                            buttonText: "Okay",
-                          ),
+                          androidBorderRadius: 30,
+                          actions: <BottomSheetAction>[
+                            BottomSheetAction(
+                                title: const Text('Liste des Motifs',
+                                    style: TextStyle(
+                                        fontSize: 13, fontFamily: 'Poppins')),
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => MotifScreen()));
+                                }),
+                            BottomSheetAction(
+                                title: const Text('Créer un Motifs',
+                                    style: TextStyle(
+                                        fontSize: 13, fontFamily: 'Poppins')),
+                                onPressed: () {}),
+                          ],
+                          cancelAction: CancelAction(
+                              title: const Text('retour',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontFamily:
+                                          'Poppins'))), // onPressed parameter is optional by default will dismiss the ActionSheet
                         );
                       },
                       child: CardMenu(
@@ -112,14 +160,36 @@ class _DashboardHomeState extends State<DashboardHome> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        showDialog(
+                        showAdaptiveActionSheet(
                           context: context,
-                          builder: (BuildContext context) => CustomDialog(
-                            title: "",
-                            description: "",
-                            buttonText: "Okay",
-                          ),
+                          androidBorderRadius: 30,
+                          actions: <BottomSheetAction>[
+                            BottomSheetAction(
+                                title: const Text('Liste des Paiements',
+                                    style: TextStyle(
+                                        fontSize: 13, fontFamily: 'Poppins')),
+                                onPressed: () {}),
+                            BottomSheetAction(
+                                title: const Text('Effectué un Paiement',
+                                    style: TextStyle(
+                                        fontSize: 13, fontFamily: 'Poppins')),
+                                onPressed: () {}),
+                          ],
+                          cancelAction: CancelAction(
+                              title: const Text('retour',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontFamily:
+                                          'Poppins'))), // onPressed parameter is optional by default will dismiss the ActionSheet
                         );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) => CustomDialog(
+                        //     title: "",
+                        //     description: "",
+                        //     buttonText: "Okay",
+                        //   ),
+                        // );
                       },
                       child: CardMenu(
                           image: 'assets/images/dash.png', text: 'Paiements'),

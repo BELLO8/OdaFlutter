@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oda_cagnotte/screens/academicien_list_view.dart';
 import 'package:oda_cagnotte/screens/dashboard.dart';
 import 'dart:async';
-
-import 'package:oda_cagnotte/screens/statiques.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: StatiquesView(),
+      home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

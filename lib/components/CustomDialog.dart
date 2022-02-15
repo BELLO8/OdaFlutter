@@ -87,10 +87,10 @@ class CustomDialog extends StatelessWidget {
                   child: FlatButton(
                     color: Color(0xFFDB833C),
                     onPressed: () {
-                      Navigator.of(context).pop(); // To close the dialog
+                      //Navigator.of(context).pop(); // To close the dialog
                     },
                     child: Text(
-                      "Rechercher",
+                      "Enregister",
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Poppins',
