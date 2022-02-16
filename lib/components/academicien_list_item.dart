@@ -55,7 +55,7 @@ class _AcademicienListItem extends State<AcademicienListItem> {
               margin: EdgeInsets.only(top: 5.0),
               height: 63,
               width: screenwidth,
-              color: Colors.white,
+              color: Color(0xFFE99B35),
               child: Row(
                 children: <Widget>[
                   GestureDetector(
@@ -107,7 +107,6 @@ class _AcademicienListItem extends State<AcademicienListItem> {
                             //     style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 12, fontFamily: 'Montserrat'),
                             //   ),
                             // ),
-
                             SizedBox(
                               width: 20,
                             ),

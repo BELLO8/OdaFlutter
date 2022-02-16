@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:oda_cagnotte/components/CustomDialog.dart';
 import 'package:oda_cagnotte/components/academicien_list_item.dart';
 import 'package:oda_cagnotte/components/custom_app_bar.dart';
@@ -34,7 +35,11 @@ class _AcademicienListViewState extends State<AcademicienListView> {
               if (snapShot.hasData) {
                 return AcademicienListItem(snapShot.data!);
               } else {
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                  child: LoadingBouncingGrid.circle(
+                    backgroundColor: Color(0xFFFFA618),
+                  ),
+                );
               }
             }),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:oda_cagnotte/components/custom_app_bar.dart';
 import 'package:oda_cagnotte/models/motif.dart';
 import 'package:oda_cagnotte/services/api.dart';
@@ -70,7 +71,12 @@ class _MotifScreenState extends State<MotifScreen> {
                 ),
               );
             } else {
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                child: LoadingBouncingGrid.circle(
+                  backgroundColor: Color(0xFFFFA618),
+                ),
+              );
+              ;
             }
           },
         ),

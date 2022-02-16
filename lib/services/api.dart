@@ -8,6 +8,7 @@ import 'package:oda_cagnotte/helpers/app_constant.dart';
 import 'package:oda_cagnotte/models/academiciens.dart';
 import 'package:oda_cagnotte/models/counts.dart';
 import 'package:oda_cagnotte/models/motif.dart';
+import 'package:oda_cagnotte/screens/academicien_list_view.dart';
 
 Future<List<Academicien>> allAcademicien() async {
   List<Academicien> _list = [];
@@ -60,6 +61,7 @@ Future<Count> getCounts() async {
 Future<http.StreamedResponse> createAcademicien(
   Academicien academicien,
   XFile data,
+  BuildContext context,
 ) async {
   File _file = File(data.path);
   String fileName = _file.path.split('/').last;
@@ -74,6 +76,9 @@ Future<http.StreamedResponse> createAcademicien(
   request.fields["matricule"] = academicien.matricule.toString();
   // request.fields["shop_id"] = customer.shopper_id.toString();
   http.StreamedResponse response = await request.send();
+
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => AcademicienListView()));
   return response;
 }
 
