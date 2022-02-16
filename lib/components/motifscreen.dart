@@ -38,7 +38,7 @@ class _MotifScreenState extends State<MotifScreen> {
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     padding: EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
-                      color: Color(0xff97FFFF),
+                      color: Color(0xFFFF9C40),
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: Column(
@@ -48,12 +48,22 @@ class _MotifScreenState extends State<MotifScreen> {
                         Text(
                           "${snapshot.data![index].motif}",
                           style: TextStyle(
+                            color: Colors.white,
                             fontSize: 18.0,
+                            fontFamily: "Poppins",
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(height: 10),
-                        Text("${snapshot.data![index].date}"),
+                        Text(
+                          "${snapshot.data![index].date}",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
                   ),

@@ -17,7 +17,7 @@ class Academicien {
   factory Academicien.fromJson(Map<String, dynamic> json) {
     return Academicien(
       matricule: json['matricule'],
-      photo: AppConstants.URL_BASE + json['photo'],
+      photo: AppConstants.URL_BASE + "/media/" + json['photo'],
       nom: json['nom'],
       prenoms: json['prenoms'],
     );

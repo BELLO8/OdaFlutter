@@ -5,6 +5,8 @@ import 'package:oda_cagnotte/components/bannerCard.dart';
 import 'package:oda_cagnotte/components/card.dart';
 import 'package:oda_cagnotte/components/motifscreen.dart';
 import 'package:oda_cagnotte/screens/academicien_list_view.dart';
+import 'package:oda_cagnotte/screens/addAcademiciens.dart';
+import 'package:oda_cagnotte/screens/addMotif.dart';
 import 'package:oda_cagnotte/screens/motif.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -103,7 +105,11 @@ class _DashboardHomeState extends State<DashboardHome> {
                                 title: const Text('Créer un Academiciens',
                                     style: TextStyle(
                                         fontSize: 13, fontFamily: 'Poppins')),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          AcademicienBottomSheet()));
+                                }),
                           ],
                           cancelAction: CancelAction(
                               title: const Text('retour',
@@ -144,7 +150,16 @@ class _DashboardHomeState extends State<DashboardHome> {
                                 title: const Text('Créer un Motifs',
                                     style: TextStyle(
                                         fontSize: 13, fontFamily: 'Poppins')),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return MotifPage();
+                                      },
+                                    ),
+                                  );
+                                }),
                           ],
                           cancelAction: CancelAction(
                               title: const Text('retour',
