@@ -6,6 +6,7 @@ import 'package:http/src/response.dart';
 import 'package:http/http.dart' as http;
 import 'package:oda_cagnotte/components/minicard.dart';
 import 'package:oda_cagnotte/models/academiciens.dart';
+import 'package:oda_cagnotte/models/counts.dart';
 
 import '../services/api.dart';
 
@@ -14,10 +15,10 @@ class BannerCard extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final Future<String> counter = countAcademicien();
-  final Future<String> count_motif = countMotif();
-  final Future<String> count_pay = countPay();
-  final Future<String> solde = getSolde();
+  // final Future<String> counter = countAcademicien();
+  // final Future<String> count_motif = countMotif();
+  // final Future<String> count_pay = countPay();
+  late Future<Count> counter = getCounts();
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +49,12 @@ class BannerCard extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.topLeft,
-                  child: FutureBuilder<String>(
-                      future: solde,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
+                  child: FutureBuilder<Count>(
+                      future: counter,
+                      builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return Text(
-                            '${snapshot.data} FrCfa',
+                            '${snapshot.data!.solde} FrCfa',
                             style: TextStyle(
                               fontSize: 35,
                               color: Colors.white,
@@ -76,12 +76,12 @@ class BannerCard extends StatelessWidget {
               children: [
                 MiniCard(
                   text: 'Academiciens',
-                  child: FutureBuilder<String>(
+                  child: FutureBuilder<Count>(
                       future: counter,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
+                      builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return customText(text: '${snapshot.data}');
+                          return customText(
+                              text: '${snapshot.data!.nbreAcademicien}');
                         } else {
                           return Text("0");
                         }
@@ -89,12 +89,12 @@ class BannerCard extends StatelessWidget {
                 ),
                 MiniCard(
                   text: 'Motifs',
-                  child: FutureBuilder<String>(
-                      future: count_motif,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
+                  child: FutureBuilder<Count>(
+                      future: counter,
+                      builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return customText(text: '${snapshot.data}');
+                          return customText(
+                              text: '${snapshot.data!.nbreMotif}');
                         } else {
                           return Text("0");
                         }
@@ -102,12 +102,12 @@ class BannerCard extends StatelessWidget {
                 ),
                 MiniCard(
                   text: 'Paiements',
-                  child: FutureBuilder<String>(
-                      future: count_pay,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
+                  child: FutureBuilder<Count>(
+                      future: counter,
+                      builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return customText(text: '${snapshot.data}');
+                          return customText(
+                              text: '${snapshot.data!.nbrePayement}');
                         } else {
                           return Text("0");
                         }
