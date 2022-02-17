@@ -28,6 +28,7 @@ class CustomTextField extends StatefulWidget {
   final Function onSubmit;
   final bool isEnabled;
   final TextCapitalization capitalization;
+  final TextInputType? keyboardType;
 
   CustomTextField({
     this.hintText = 'Write something...',
@@ -54,6 +55,7 @@ class CustomTextField extends StatefulWidget {
     this.suffixIconUrl,
     this.prefixIconUrl,
     this.isSearch = false,
+    this.keyboardType,
   });
 
   @override

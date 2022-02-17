@@ -116,7 +116,7 @@ class _AcademicienBottomSheetState extends State<AcademicienBottomSheet> {
                   controller: _descriptionController,
                   onChanged: (text) {},
                   onSubmit: () {},
-                  fillColor: AppConstants.scaffoldBackground,
+                  fillColor: AppConstants.scaffoldBackground, keyboardType: null,
                 ),
               ),
               Padding(

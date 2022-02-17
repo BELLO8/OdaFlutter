@@ -8,6 +8,7 @@ import 'package:oda_cagnotte/helpers/app_constant.dart';
 import 'package:oda_cagnotte/models/academiciens.dart';
 import 'package:oda_cagnotte/models/counts.dart';
 import 'package:oda_cagnotte/models/motif.dart';
+import 'package:oda_cagnotte/models/paiement.dart';
 import 'package:oda_cagnotte/screens/academicien_list_view.dart';
 
 Future<List<Academicien>> allAcademicien() async {
@@ -117,6 +118,43 @@ Future<Null> AddMotif(
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+  } else {
+    throw new Exception('Erreur de chargement des données');
+  }
+}
+
+Future<Cagnotte> AddPayement(Cagnotte paiement, BuildContext context) async {
+  var montant;
+  final http.Response response = await http.post(
+    Uri.parse('https://no-sir-apps.herokuapp.com/api/v1/all-payement/'),
+    headers: <String, String>{
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'matricule': paiement.matricule_id,
+      'montant': paiement.montant,
+      'motif': paiement.motif,
+    }),
+  );
+  if (response.statusCode == 200) {
+    Map<String, dynamic> data = jsonDecode(response.body);
+    if (data['status']) {
+      final snackBar = SnackBar(
+        content: Text('${data['msg']}',
+            style: TextStyle(
+                color: Color(0xFFFFFFFF),
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.bold)),
+        backgroundColor: Color(0xFF8AE268),
+        behavior: SnackBarBehavior.floating,
+        action: SnackBarAction(
+          label: 'Fermer',
+          onPressed: () {},
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    return Cagnotte.fromJson(jsonDecode(response.body));
   } else {
     throw new Exception('Erreur de chargement des données');
   }
