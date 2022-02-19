@@ -27,9 +27,8 @@ class _AcademicienListViewState extends State<AcademicienListView> {
         title: "Academicien",
         isBackButtonExist: true,
       ),
-      backgroundColor: Color(0xffF4F7FC),
       body: SafeArea(
-        child: FutureBuilder(
+        child: FutureBuilder<List<Academicien>>(
             future: allAcademicien(),
             builder: (context, snapShot) {
               if (snapShot.hasData) {

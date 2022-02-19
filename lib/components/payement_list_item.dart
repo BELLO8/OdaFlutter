@@ -16,20 +16,7 @@ class _PayementListItem extends State<PayementListItem> {
   @override
   void initState() {
     super.initState();
-
-    // Get.find<ShopController>().getShopCategorie();
-
-    currentSelectedIndex = 0;
-    currentSelectedIndex1 = 0;
   }
-
-  int currentSelectedIndex = 0;
-  int currentSelectedIndex1 = 0;
-  String? categoryname;
-  bool value = false;
-  bool _btnEnabled = false;
-
-  int _current = 0;
 
   void bookapointment() {
     print('CALLBACK: _onDaySelected');
@@ -43,127 +30,119 @@ class _PayementListItem extends State<PayementListItem> {
 
     return SafeArea(
         child: Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+      ),
       margin: EdgeInsets.only(top: 10.0, bottom: 130),
       child: ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            child: Container(
-              margin: EdgeInsets.only(top: 5.0),
-              height: 63,
-              width: screenwidth,
-              color: Colors.white,
-              child: Row(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {},
-                    child: new Container(
-                      margin: EdgeInsets.only(left: 10, top: 5),
-                      height: 35,
-                      width: 35,
-                      alignment: Alignment.topLeft,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: FadeInImage.assetNetwork(
-                          placeholder: "assets/images/users.png",
-                          image: widget.listAcademicien[index].photo,
-                          // image: Get.find<AuthController>()
-                          //     .getShopper!
-                          //     .user!
-                          //     .image
-                          //     .toString(),
-                          height: 180,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          imageErrorBuilder: (c, o, s) => Image.asset(
-                              "assets/images/users.png",
-                              height: 100,
-                              width: 100,
-                              fit: BoxFit.cover),
-                        ),
-                      ),
+        itemCount: widget.listAcademicien.length,
+        itemBuilder: (_, index) => Container(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xFFD3D1D1),
+                  blurRadius: 35.0,
+                  offset: const Offset(0.0, 1.0),
+                ),
+              ],
+              color: Color(0xFFFFFFFF),
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 10, right: 12, top: 5),
+                  height: 55,
+                  width: 55,
+                  alignment: Alignment.topLeft,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: "assets/images/users.png",
+                      image: widget.listAcademicien[index].photo,
+                      // image: Get.find<AuthController>()
+                      //     .getShopper!
+                      //     .user!
+                      //     .image
+                      //     .toString(),
+                      height: 180,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      imageErrorBuilder: (c, o, s) => Image.asset(
+                          "assets/images/users.png",
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.cover),
                     ),
                   ),
-                  new Container(
-                      margin: EdgeInsets.only(left: 10, top: 10),
-                      height: 50,
-                      // margin: EdgeInsets.only(left: 10,top: 10),
-                      // width: double.infinity,
-
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * .70,
-                        height: 30,
-                        margin: EdgeInsets.only(left: 1, bottom: 5, right: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Container(
-                            //   child: Text(
-                            //     shopController.getCategoriesServiceList[currentSelectedIndex].services![index].name.toString(),
-                            //     style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 12, fontFamily: 'Montserrat'),
-                            //   ),
-                            // ),
-
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text("Prenoms: " +
-                                widget.listAcademicien[index].nom),
-                            // Container(
-                            //   child: Text(
-                            //     shopController.getCategoriesServiceList[currentSelectedIndex].services![index].price.toString() + 'FCFA',
-                            //     style: TextStyle(color: const Color(0xFF999999), fontWeight: FontWeight.w600, fontSize: 12, fontFamily: 'Montserrat'),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      )),
-                  new Container(
-                    margin: EdgeInsets.only(left: 10, top: 5),
-                    width: 20,
-                    height: 20,
-                    color: Colors.white,
-
-                    // child: new CustomCheckBox(value),
-
-                    //
-                    child: Container(
-                        width: 50,
-                        height: 50,
-                        child: Expanded(
-                          child: Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(1.0),
-                                    child: Icon(Icons.delete,
-                                        size: 15.0,
-                                        color: Theme.of(context)
-                                            .primaryColorLight),
-                                  ),
-                                ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Nom : " +
+                          widget.listAcademicien[index].nom +
+                          "\nPrenoms : " +
+                          widget.listAcademicien[index].prenoms,
+                      style: TextStyle(
+                        color: Color(0xFF333232),
+                        fontSize: 15.0,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Matricule : " + widget.listAcademicien[index].matricule,
+                      style: TextStyle(
+                        color: Color(0xFF777676),
+                        fontSize: 11,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.delete_forever_outlined),
+                  color: Color(0xFFF0895A),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Expanded(
+                          child: AlertDialog(
+                            title: Text('Oda Cagnotte'),
+                            content: Text('Voulez-vous supprimer ?'),
+                            actions: [
+                              FlatButton(
+                                textColor: Colors.black,
+                                onPressed: () {},
+                                child: Text('Retour'),
+                              ),
+                              FlatButton(
+                                textColor: Colors.black,
+                                onPressed: () {},
+                                child: Text('Ok'),
                               ),
                             ],
                           ),
-                        )),
-                  ),
-                ],
-              ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
             ),
-          );
-        },
-        itemCount: widget.listAcademicien.length,
+          ),
+        ),
       ),
     ));
   }

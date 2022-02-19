@@ -1,5 +1,6 @@
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:oda_cagnotte/components/CustomDialog.dart';
 import 'package:oda_cagnotte/components/bannerCard.dart';
 import 'package:oda_cagnotte/components/card.dart';
@@ -9,6 +10,7 @@ import 'package:oda_cagnotte/screens/academicien_list_view.dart';
 import 'package:oda_cagnotte/screens/addAcademiciens.dart';
 import 'package:oda_cagnotte/screens/addMotif.dart';
 import 'package:oda_cagnotte/screens/motif.dart';
+import 'package:oda_cagnotte/screens/payement_list_view.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class DashboardHome extends StatefulWidget {
@@ -184,7 +186,13 @@ class _DashboardHomeState extends State<DashboardHome> {
                                 title: const Text('Liste des Paiements',
                                     style: TextStyle(
                                         fontSize: 13, fontFamily: 'Poppins')),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => PayementListView(),
+                                    ),
+                                  );
+                                }),
                             BottomSheetAction(
                                 title: const Text('Effectué un Paiement',
                                     style: TextStyle(

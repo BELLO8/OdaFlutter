@@ -11,6 +11,25 @@ import 'package:oda_cagnotte/models/motif.dart';
 import 'package:oda_cagnotte/models/paiement.dart';
 import 'package:oda_cagnotte/screens/academicien_list_view.dart';
 
+Future<List<Academicien>> allPaiement() async {
+  List<Academicien> _list = [];
+  final http.Response response = await http.get(
+    Uri.parse(AppConstants.URL_BASE + "/all-payement/"),
+    headers: <String, String>{
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    Map<String, dynamic> data = jsonDecode(response.body);
+
+    Iterable it = data['content'];
+    _list = it.map((e) => Academicien.fromJson(e)).toList();
+    return _list;
+  } else {
+    throw new Exception('Erreur de chargement des données');
+  }
+}
+
 Future<List<Academicien>> allAcademicien() async {
   List<Academicien> _list = [];
   final http.Response response = await http.get(

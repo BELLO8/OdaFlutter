@@ -39,31 +39,72 @@ class _MotifScreenState extends State<MotifScreen> {
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     padding: EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
-                      color: Color(0xFFFF9C40),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFFD3D1D1),
+                          blurRadius: 35.0,
+                          offset: const Offset(0.0, 1.0),
+                        ),
+                      ],
+                      color: Color(0xFFFFFFFF),
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        Text(
-                          "${snapshot.data![index].motif}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontFamily: "Poppins",
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${snapshot.data![index].motif}",
+                              style: TextStyle(
+                                color: Color(0xFF1F1F1F),
+                                fontSize: 16.0,
+                                fontFamily: "Poppins",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              "${snapshot.data![index].date}",
+                              style: TextStyle(
+                                color: Color(0xFF090214),
+                                fontSize: 11,
+                                fontFamily: "Poppins",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          "${snapshot.data![index].date}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontFamily: "Poppins",
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Spacer(),
+                        IconButton(
+                          icon: const Icon(Icons.delete_forever_outlined),
+                          color: Color(0xFFF0895A),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Expanded(
+                                  child: AlertDialog(
+                                    title: Text('Oda Cagnotte'),
+                                    content: Text('Voulez-vous supprimer ?'),
+                                    actions: [
+                                      FlatButton(
+                                        textColor: Colors.black,
+                                        onPressed: () {},
+                                        child: Text('Retour'),
+                                      ),
+                                      FlatButton(
+                                        textColor: Colors.black,
+                                        onPressed: () {},
+                                        child: Text('Ok'),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -76,7 +117,6 @@ class _MotifScreenState extends State<MotifScreen> {
                   backgroundColor: Color(0xFFFFA618),
                 ),
               );
-              ;
             }
           },
         ),

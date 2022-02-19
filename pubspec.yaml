@@ -44,6 +44,8 @@ dependencies:
   get: ^4.3.8
   adaptive_action_sheet: ^2.0.1
   loading_animations: ^2.2.0
+  flutter_slidable: ^1.2.0
+  sticky_grouped_list: ^2.1.0
 
 dev_dependencies:
   flutter_test:
