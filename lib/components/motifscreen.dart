@@ -81,28 +81,33 @@ class _MotifScreenState extends State<MotifScreen> {
                           icon: const Icon(Icons.delete_forever_outlined),
                           color: Color(0xFFF0895A),
                           onPressed: () {
-                            showDialog(
+                            showDialog<String>(
                               context: context,
-                              builder: (BuildContext context) {
-                                return Expanded(
-                                  child: AlertDialog(
-                                    title: Text('Oda Cagnotte'),
-                                    content: Text('Voulez-vous supprimer ?'),
-                                    actions: [
-                                      FlatButton(
-                                        textColor: Colors.black,
-                                        onPressed: () {},
-                                        child: Text('Retour'),
-                                      ),
-                                      FlatButton(
-                                        textColor: Colors.black,
-                                        onPressed: () {},
-                                        child: Text('Ok'),
-                                      ),
-                                    ],
+                              builder: (BuildContext context) => AlertDialog(
+                                title: const Text('Oda Cagnotte'),
+                                content: const Text('Voulez-vous supprimer ?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'Non'),
+                                    child: const Text('Non'),
                                   ),
-                                );
-                              },
+                                  TextButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        deleteMotif(
+                                            snapshot.data![index].id.toString(),
+                                            context);
+                                      });
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MotifScreen()));
+                                    },
+                                    child: const Text('Oui'),
+                                  ),
+                                ],
+                              ),
                             );
                           },
                         ),

@@ -3,13 +3,15 @@ import 'dart:convert';
 import 'package:oda_cagnotte/helpers/app_constant.dart';
 
 class Academicien {
+  final int? id;
   final String matricule;
   final String nom;
   final String photo;
   final String prenoms;
 
   const Academicien(
-      {required this.matricule,
+      {this.id,
+      required this.matricule,
       required this.nom,
       required this.prenoms,
       required this.photo});

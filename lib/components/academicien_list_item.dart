@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:oda_cagnotte/models/academiciens.dart';
+import 'package:oda_cagnotte/services/api.dart';
 
 class AcademicienListItem extends StatefulWidget {
   var listAcademicien;
@@ -104,28 +105,29 @@ class _AcademicienListItem extends State<AcademicienListItem> {
                   icon: const Icon(Icons.delete_forever_outlined),
                   color: Color(0xFFF0895A),
                   onPressed: () {
-                    showDialog(
+                    showDialog<String>(
                       context: context,
-                      builder: (BuildContext context) {
-                        return Expanded(
-                          child: AlertDialog(
-                            title: Text('Oda Cagnotte'),
-                            content: Text('Voulez-vous supprimer ?'),
-                            actions: [
-                              FlatButton(
-                                textColor: Colors.black,
-                                onPressed: () {},
-                                child: Text('Retour'),
-                              ),
-                              FlatButton(
-                                textColor: Colors.black,
-                                onPressed: () {},
-                                child: Text('Ok'),
-                              ),
-                            ],
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Oda Cagnotte'),
+                        content: const Text('Voulez-vous supprimer ?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Non'),
+                            child: const Text('Non'),
                           ),
-                        );
-                      },
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                deleteAcademicien(widget
+                                    .listAcademicien[index].id
+                                    .toString());
+                              });
+                              Navigator.pop(context, 'Oui');
+                            },
+                            child: const Text('Oui'),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),

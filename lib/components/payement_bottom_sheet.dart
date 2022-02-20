@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:oda_cagnotte/components/buttons.dart';
 import 'package:oda_cagnotte/components/custom_app_bar.dart';
 import 'package:oda_cagnotte/components/custom_text_field.dart';
@@ -28,25 +29,28 @@ class _PayementBottomSheetState extends State<PayementBottomSheet> {
   bool _valid = false;
   TextEditingController _montantController = TextEditingController();
   TextEditingController _motifController = TextEditingController();
-  String cat_id = "";
 
   List data = [];
-
-  Future<String> getSWData() async {
-    var res = await http.get(
+  late Future<String> future;
+  Future<String> getData() async {
+    final response = await http.get(
         Uri.parse("https://oda-cagnotte.herokuapp.com/api/v1/list-of-motif/"));
-    var resBody = json.decode(res.body);
-    setState(() {
-      data = resBody['content'];
-    });
-    print(data);
-    return "";
+    if (response.statusCode == 200) {
+      Map<String, dynamic> resb = jsonDecode(response.body);
+      setState(() {
+        data = resb['content'];
+      });
+
+      return "";
+    } else {
+      throw Exception('Unexpected error occured!');
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    this.getSWData();
+    future = getData();
     // motif = fetchMotif();
   }
 
@@ -149,22 +153,34 @@ class _PayementBottomSheetState extends State<PayementBottomSheet> {
                 color: Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: DropdownButton(
-                hint: Text("Selectionner un motif"),
-                isExpanded: true,
-                items: data.map((item) {
-                  return new DropdownMenuItem(
-                    child: new Text(item['motif']),
-                    value: item['id'].toString(),
-                  );
-                }).toList(),
-                onChanged: (String? newVal) {
-                  setState(() {
-                    _mySelection = newVal!;
-                  });
-                },
-                value: _mySelection,
-              ),
+              child: FutureBuilder<String>(
+                  future: future,
+                  builder: (context, snapShot) {
+                    if (snapShot.hasData) {
+                      return DropdownButton(
+                        hint: Text("Selectionner un motif"),
+                        isExpanded: true,
+                        items: data.map((item) {
+                          return new DropdownMenuItem(
+                            child: new Text(item['motif'].toString()),
+                            value: item['id'].toString(),
+                          );
+                        }).toList(),
+                        onChanged: (String? newVal) {
+                          setState(() {
+                            _mySelection = newVal!;
+                          });
+                        },
+                        value: _mySelection,
+                      );
+                    } else {
+                      return Center(
+                        child: LoadingBouncingGrid.circle(
+                          backgroundColor: Color(0xFFFFA618),
+                        ),
+                      );
+                    }
+                  }),
             ),
             Container(
               width: size.width * 0.8,

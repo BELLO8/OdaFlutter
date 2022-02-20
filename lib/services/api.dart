@@ -49,6 +49,28 @@ Future<List<Academicien>> allAcademicien() async {
   }
 }
 
+Future<List<Motif>> deleteMotif(String id, BuildContext context) async {
+  final response = await http.delete(
+      Uri.parse("https://oda-cagnotte.herokuapp.com/api/v1/deleted-motif/$id"));
+  if (response.statusCode == 200) {
+    Map<String, dynamic> data = jsonDecode(response.body);
+    return fetchMotif();
+  } else {
+    throw Exception('Unexpected error occured!');
+  }
+}
+
+Future<List<Academicien>> deleteAcademicien(String id) async {
+  final response = await http.delete(Uri.parse(
+      "http://oda-cagnotte.herokuapp.com/api/v1/delete-academicien/$id"));
+  if (response.statusCode == 200) {
+    Map<String, dynamic> data = jsonDecode(response.body);
+    return allAcademicien();
+  } else {
+    throw Exception('Unexpected error occured!');
+  }
+}
+
 Future<List<Motif>> fetchMotif() async {
   List<Motif> _list = [];
   final response = await http.get(
