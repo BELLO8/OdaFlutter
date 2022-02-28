@@ -63,7 +63,13 @@ class BannerCard extends StatelessWidget {
                             ),
                           );
                         } else {
-                          return Text("0");
+                          return SizedBox(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                            height: 15.0,
+                            width: 15.0,
+                          );
                         }
                       }),
                 ),
@@ -83,7 +89,14 @@ class BannerCard extends StatelessWidget {
                           return customText(
                               text: '${snapshot.data!.nbreAcademicien}');
                         } else {
-                          return Text("0");
+                          return SizedBox(
+                            child: CircularProgressIndicator(
+                              color: Color(0xFFEC8E4F),
+                            ),
+                            height: 15.0,
+                            width: 15.0,
+                          );
+                          ;
                         }
                       }),
                 ),
@@ -96,7 +109,13 @@ class BannerCard extends StatelessWidget {
                           return customText(
                               text: '${snapshot.data!.nbreMotif}');
                         } else {
-                          return Text("0");
+                          return SizedBox(
+                            child: CircularProgressIndicator(
+                              color: Color(0xFFEC8E4F),
+                            ),
+                            height: 15.0,
+                            width: 15.0,
+                          );
                         }
                       }),
                 ),
@@ -109,7 +128,13 @@ class BannerCard extends StatelessWidget {
                           return customText(
                               text: '${snapshot.data!.nbrePayement}');
                         } else {
-                          return Text("0");
+                          return SizedBox(
+                            child: CircularProgressIndicator(
+                              color: Color(0xFFEC8E4F),
+                            ),
+                            height: 15.0,
+                            width: 15.0,
+                          );
                         }
                       }),
                 ),

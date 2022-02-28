@@ -31,9 +31,24 @@ class _AcademicienBottomSheetState extends State<AcademicienBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Ajouter un motif",
-        isBackButtonExist: true,
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        toolbarHeight: 140,
+        title: Text("Ajouter un academicien",
+            style: TextStyle(fontFamily: "Poppins")),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(50)),
+              gradient: LinearGradient(
+                  colors: [Color(0xFFD1831D), Color(0xFFEBAF50)],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter)),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -44,20 +59,11 @@ class _AcademicienBottomSheetState extends State<AcademicienBottomSheet> {
               SizedBox(
                 height: 7,
               ),
-              Text("Ajouter un academicien",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: "Poppins",
-                  )),
+
               SizedBox(
                 height: 7,
               ),
-              DividerWidget(),
-              SizedBox(
-                height: 57,
-              ),
+
               GestureDetector(
                 onTap: () {
                   pickImage();
@@ -116,7 +122,8 @@ class _AcademicienBottomSheetState extends State<AcademicienBottomSheet> {
                   controller: _descriptionController,
                   onChanged: (text) {},
                   onSubmit: () {},
-                  fillColor: AppConstants.scaffoldBackground, keyboardType: null,
+                  fillColor: AppConstants.scaffoldBackground,
+                  keyboardType: null,
                 ),
               ),
               Padding(
@@ -167,7 +174,7 @@ class _AcademicienBottomSheetState extends State<AcademicienBottomSheet> {
                           prenoms: _descriptionController.text,
                           nom: _nomController.text,
                           photo: "");
-                      createAcademicien(aca, _pickedFile as XFile,context);
+                      createAcademicien(aca, _pickedFile as XFile, context);
                     },
                   )
                 ],

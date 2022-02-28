@@ -34,9 +34,24 @@ class _MotifPage extends State<MotifPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Ajouter un motif",
-        isBackButtonExist: true,
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        toolbarHeight: 140,
+        title:
+            Text("Ajouter un motif", style: TextStyle(fontFamily: "Poppins")),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(50)),
+              gradient: LinearGradient(
+                  colors: [Color(0xFFD1831D), Color(0xFFEBAF50)],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter)),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 28.0),
@@ -67,15 +82,6 @@ class _MotifPage extends State<MotifPage> {
                       ),
                       child: Column(
                         children: [
-                          Text(
-                            "Ajouter un motif",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
                           // Image.asset("assets/images/Make it rain-cuate.png",
                           //     height: size.height * 0.5),
                         ],
@@ -138,15 +144,6 @@ class _MotifPage extends State<MotifPage> {
                                 } else {
                                   AddMotif(_text.text, context);
                                   _text.text = '';
-                                  // showDialog(
-                                  //   context: context,
-                                  //   builder: (BuildContext context) =>
-                                  //       CustomDialog(
-                                  //     title: "Enregistrer avec Succès",
-                                  //     description: "",
-                                  //     buttonText: "Okay",
-                                  //   ),
-                                  // );
                                 }
                               });
                             },

@@ -23,9 +23,24 @@ class _AcademicienListViewState extends State<AcademicienListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Academicien",
-        isBackButtonExist: true,
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        toolbarHeight: 110,
+        title: Text("Liste des academiciens",
+            style: TextStyle(fontFamily: "Poppins")),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(24),
+                  bottomRight: Radius.circular(24)),
+              gradient: LinearGradient(
+                  colors: [Color(0xFFD1831D), Color(0xFFEBAF50)],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter)),
+        ),
       ),
       body: SafeArea(
         child: FutureBuilder<List<Academicien>>(

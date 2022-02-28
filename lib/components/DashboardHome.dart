@@ -21,44 +21,16 @@ class DashboardHome extends StatefulWidget {
 }
 
 class _DashboardHomeState extends State<DashboardHome> {
-  var _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: SalomonBottomBar(
-        currentIndex: _currentIndex,
-        onTap: (i) => setState(() => _currentIndex = i),
-        items: [
-          /// Dashboard
-          SalomonBottomBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Dashboard"),
-            selectedColor: Colors.purple,
-          ),
-
-          /// Stats
-          SalomonBottomBarItem(
-            icon: Icon(Icons.stacked_bar_chart),
-            title: Text("Stats"),
-            selectedColor: Colors.pink,
-          ),
-
-          /// Paiements
-          SalomonBottomBarItem(
-            icon: Icon(Icons.credit_card_outlined),
-            title: Text("Paiements"),
-            selectedColor: Colors.orange,
-          ),
-
-          /// Classements
-          SalomonBottomBarItem(
-            icon: Icon(Icons.list_outlined),
-            title: Text("Classements"),
-            selectedColor: Colors.teal,
-          ),
-        ],
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        toolbarHeight: 230,
+        flexibleSpace: BannerCard(),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -84,7 +56,6 @@ class _DashboardHomeState extends State<DashboardHome> {
                   ],
                 ),
               ),
-              BannerCard(),
               SizedBox(height: 3),
               Center(
                 child: Column(

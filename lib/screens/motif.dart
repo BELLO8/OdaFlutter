@@ -61,3 +61,49 @@
 //     );
 //   }
 // }
+
+// items: motifs.map((Motif item) {
+//         // ignore: unnecessary_new
+//         return DropdownMenuItem<String>(
+//           value: item.id.toString(), // value: motifs.id
+//           child: Text(item.label), // Text(motifs.label)
+//         );
+//       }).toList(),
+//       isExpanded: true,
+//       validator: (value) {
+//         if (value == null || value.isEmpty) {
+//           return "selectionner un motif ";
+//         }
+//         return null;
+//       },
+//       onChanged: (value) {
+//         _motif = value.toString();
+//       },
+    
+    // FutureBuilder<String>(
+    //               future: future,
+    //               builder: (context, snapShot) {
+    //                 if (snapShot.hasData) {
+    //                   return DropdownButton(
+    //                     hint: Text("Selectionner un motif"),
+    //                     isExpanded: true,
+    //                     items: motifs.map((Motif item) {
+    //                       // ignore: unnecessary_new
+    //                       return DropdownMenuItem<String>(
+    //                         value: item.id.toString(), // value: motifs.id
+    //                         child: Text(item.motif), // Text(motifs.label)
+    //                       );
+    //                     }).toList(),
+                        
+    //                     onChanged: (value) {
+    //                       _mySelection = value.toString();
+    //                     },
+    //                   );
+    //                 } else {
+    //                   return Center(
+    //                     child: LoadingBouncingGrid.circle(
+    //                       backgroundColor: Color(0xFFFFA618),
+    //                     ),
+    //                   );
+    //                 }
+    //               }),

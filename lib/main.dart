@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oda_cagnotte/components/NavBar.dart';
 import 'package:oda_cagnotte/screens/dashboard.dart';
 import 'dart:async';
 
@@ -33,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void __goToDashboard(BuildContext context) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Dashboard()));
+        .push(MaterialPageRoute(builder: (context) => NavBar()));
   }
 
   @override

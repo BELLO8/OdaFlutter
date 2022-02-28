@@ -29,28 +29,24 @@ class _PayementBottomSheetState extends State<PayementBottomSheet> {
   bool _valid = false;
   TextEditingController _montantController = TextEditingController();
   TextEditingController _motifController = TextEditingController();
-
   List data = [];
   late Future<String> future;
+
   Future<String> getData() async {
     final response = await http.get(
         Uri.parse("https://oda-cagnotte.herokuapp.com/api/v1/list-of-motif/"));
-    if (response.statusCode == 200) {
-      Map<String, dynamic> resb = jsonDecode(response.body);
-      setState(() {
-        data = resb['content'];
-      });
 
-      return "";
-    } else {
-      throw Exception('Unexpected error occured!');
-    }
+    var resb = jsonDecode(response.body);
+    setState(() {
+      data = resb['content'];
+    });
+    return "success";
   }
 
   @override
   void initState() {
     super.initState();
-    future = getData();
+    this.getData();
     // motif = fetchMotif();
   }
 
@@ -153,34 +149,7 @@ class _PayementBottomSheetState extends State<PayementBottomSheet> {
                 color: Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: FutureBuilder<String>(
-                  future: future,
-                  builder: (context, snapShot) {
-                    if (snapShot.hasData) {
-                      return DropdownButton(
-                        hint: Text("Selectionner un motif"),
-                        isExpanded: true,
-                        items: data.map((item) {
-                          return new DropdownMenuItem(
-                            child: new Text(item['motif'].toString()),
-                            value: item['id'].toString(),
-                          );
-                        }).toList(),
-                        onChanged: (String? newVal) {
-                          setState(() {
-                            _mySelection = newVal!;
-                          });
-                        },
-                        value: _mySelection,
-                      );
-                    } else {
-                      return Center(
-                        child: LoadingBouncingGrid.circle(
-                          backgroundColor: Color(0xFFFFA618),
-                        ),
-                      );
-                    }
-                  }),
+              child: DropDown(data),
             ),
             Container(
               width: size.width * 0.8,
@@ -231,5 +200,37 @@ class _PayementBottomSheetState extends State<PayementBottomSheet> {
         ),
       ),
     );
+  }
+
+  Widget DropDown(List data) {
+    if (data != null) {
+      return DropdownButton(
+        items: data.map((item) {
+          return new DropdownMenuItem(
+            child: new Text(
+              item['Name'],
+              style: TextStyle(fontSize: 14.0),
+            ),
+            value: item['ID'].toString(),
+          );
+        }).toList(),
+        hint: Text(
+          "Selectioner un motif",
+          style: TextStyle(
+            color: Colors.black45,
+          ),
+        ),
+        onChanged: (newVal) {
+          setState(() {
+            _mySelection = newVal.toString();
+          });
+        },
+        value: _mySelection,
+      );
+    } else {
+      return new Center(
+        child: CircularProgressIndicator(),
+      );
+    }
   }
 }
